@@ -37,15 +37,38 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # jwt authentication 
     'rest_framework',
+    'rest_framework_simplejwt',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    "rest_framework.authtoken",
     'corsheaders',  
     # my apps
+    'authentications',
     'categories',
     'categoriesPage',
     'services',
     'review'
 ]
  
+ 
+ 
+#  email verification 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  
+EMAIL_PORT = 587  
+EMAIL_USE_TLS = True  
+EMAIL_HOST_USER = 'foysal.cse11@gmail.com'  
+EMAIL_HOST_PASSWORD = 'szvisvfphewtlcma'  
+
+REST_USE_JWT = True
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -55,6 +78,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # jwt 
+    "allauth.account.middleware.AccountMiddleware",
 ]
 CORS_ALLOW_ALL_ORIGINS = True  
 ROOT_URLCONF = 'HomeService.urls'
@@ -129,3 +154,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# EMAIL=foysal.cse11@gmail.com
+# EMAILPASSWORD=szvisvfphewtlcma
