@@ -9,5 +9,6 @@ urlpatterns = [
     path('services/', include('services.urls') ),
     path('review/', include('review.urls') ),
     path('authentications/', include('authentications.urls') ),
+   
     
 ]

@@ -52,18 +52,20 @@ INSTALLED_APPS = [
     'categories',
     'categoriesPage',
     'services',
-    'review'
+    'review',
+
 ]
  
- 
+AUTH_USER_MODEL = 'authentications.CustomUser'
+
  
 #  email verification 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  
-EMAIL_PORT = 587  
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True  
 EMAIL_HOST_USER = 'foysal.cse11@gmail.com'  
-EMAIL_HOST_PASSWORD = 'szvisvfphewtlcma'  
+EMAIL_HOST_PASSWORD = 'swxnxvdtcshucviv'  
 
 REST_USE_JWT = True
 SIMPLE_JWT = {
@@ -158,3 +160,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # EMAIL=foysal.cse11@gmail.com
 # EMAILPASSWORD=szvisvfphewtlcma
+# 2nd 
+# EMAILPASSWORD=swxn xvdt cshu cviv
