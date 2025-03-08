@@ -6,6 +6,9 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 import jwt
 from django.conf import settings
+from rest_framework import status
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
 
 User = get_user_model()
 
@@ -65,3 +68,29 @@ class VerifyEmailView(APIView):
             return Response({"error": "Activation link expired!"}, status=status.HTTP_400_BAD_REQUEST)
         except jwt.DecodeError:
             return Response({"error": "Invalid token!"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+class LoginAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        email = request.data.get("email")
+        password = request.data.get("password")
+
+        # Check if email and password are provided
+        if not email or not password:
+            return Response({"error": "Email and password are required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Authenticate user with the provided email and password
+        user = authenticate(email=email, password=password)
+
+        if user is not None and user.is_verified and user.is_active:
+            # Create a refresh token and access token for the user
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'access': str(refresh.access_token),
+                'refresh': str(refresh),
+            })
+        else:
+            return Response({"error": "Invalid credentials or account not verified."}, status=status.HTTP_400_BAD_REQUEST)

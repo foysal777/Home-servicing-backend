@@ -53,11 +53,34 @@ INSTALLED_APPS = [
     'categoriesPage',
     'services',
     'review',
-
+   'rest_framework_simplejwt.token_blacklist',
 ]
+ 
+ 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+}
+
+
  
 AUTH_USER_MODEL = 'authentications.CustomUser'
 
+# JWT Settings
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': 'django-insecure-3q+kki&bn&%m+^tq0x81)^po(7tf+%!!d+m&abbka12)orf$t2',  # Replace with your secret key
+}
  
 #  email verification 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
