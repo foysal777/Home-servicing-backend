@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
 from rest_framework.views import APIView
@@ -62,7 +63,7 @@ class VerifyEmailView(APIView):
             user.is_active = True  # Now activate user
             user.save()
 
-            return Response({"message": "Email successfully verified!"}, status=status.HTTP_200_OK)
+            return redirect("http://localhost:5173/login")  #login page redirect hobe
 
         except jwt.ExpiredSignatureError:
             return Response({"error": "Activation link expired!"}, status=status.HTTP_400_BAD_REQUEST)
