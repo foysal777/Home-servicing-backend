@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'categoriesPage',
     'services',
     'review',
+    'user',
    'rest_framework_simplejwt.token_blacklist',
 ]
  
