@@ -55,12 +55,15 @@ INSTALLED_APPS = [
     'review',
     'user',
    'rest_framework_simplejwt.token_blacklist',
+  
 ]
  
  
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+'rest_framework.authentication.TokenAuthentication',
+'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
@@ -190,3 +193,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # EMAIL=foysal.cse11@gmail.com
 # loginPass : Goy%%s33
+    
+# token : 92a2cc4cd5170380b47c723009b49509ecfec56b

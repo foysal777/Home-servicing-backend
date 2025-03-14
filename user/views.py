@@ -1,10 +1,18 @@
-from rest_framework import generics, permissions
-from django.contrib.auth.models import User
-from .serializers import UserProfileSerializer
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from .serializers import UserSerializer
+from authentications.models import CustomUser  # CustomUser ইমপোর্ট করুন
 
-class UserProfileView(generics.RetrieveUpdateAPIView):
-    serializer_class = UserProfileSerializer
-    permission_classes = [permissions.IsAuthenticated]
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
-    def get_object(self):
-        return self.request.user  # Returns the logged-in user
+class UserProfileView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Your logic here
+        return Response({'message': 'Authenticated using JWT'})
+
