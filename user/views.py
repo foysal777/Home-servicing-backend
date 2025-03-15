@@ -2,19 +2,18 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
-from authentications.models import CustomUser  # Ensure CustomUser is imported
 
 class UserProfileView(APIView):
     authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsAuthenticated]  # Ensure authentication is required
+    permission_classes = [IsAuthenticated]  # Authentication Required
 
     def get(self, request):
-        user = request.user  # JWT token থেকে user পাওয়া যাবে
-        
-        print("Authenticated User:", user)  # Debugging এর জন্য user print করুন
+        user = request.user  # JWT থেকে user নেওয়া হবে
 
-        if not isinstance(user, CustomUser):  # User validation check
-            return Response({"error": "User not found"}, status=400)
+        print("🚀 Debug: Authenticated User ->", user)  # Debugging
+
+        if user.is_anonymous:  # যদি AnonymousUser হয়
+            return Response({"error": "Invalid Token or User not authenticated"}, status=401)
 
         return Response({
             "username": user.username,
