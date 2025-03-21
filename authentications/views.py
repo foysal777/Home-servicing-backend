@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
 import jwt
+from .serializers import LoginSerializer
 from django.conf import settings
 from rest_framework import status
 from django.contrib.auth import authenticate
@@ -73,25 +74,21 @@ class VerifyEmailView(APIView):
 
 
 
+class LoginView(APIView):
+    def post(self, request):
+        serializer = LoginSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.validated_data["user"]
 
-class LoginAPIView(APIView):
-    def post(self, request, *args, **kwargs):
-        email = request.data.get("email")
-        password = request.data.get("password")
-
-        # Check if email and password are provided
-        if not email or not password:
-            return Response({"error": "Email and password are required."}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Authenticate user with the provided email and password
-        user = authenticate(email=email, password=password)
-
-        if user is not None and user.is_verified and user.is_active:
-            # Create a refresh token and access token for the user
+            # Generate JWT tokens
             refresh = RefreshToken.for_user(user)
+            access_token = str(refresh.access_token)
+
             return Response({
-                'access': str(refresh.access_token),
-                'refresh': str(refresh),
-            })
-        else:
-            return Response({"error": "Invalid credentials or account not verified."}, status=status.HTTP_400_BAD_REQUEST)
+                "access": access_token,
+                "refresh": str(refresh),
+                "is_superuser": user.is_superuser,
+                "is_staff": user.is_staff,
+            }, status=status.HTTP_200_OK)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

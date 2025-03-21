@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'services',
     'review',
     'user',
+    'blog',
    'rest_framework_simplejwt.token_blacklist',
   
 ]

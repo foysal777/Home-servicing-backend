@@ -10,6 +10,7 @@ urlpatterns = [
     path('review/', include('review.urls') ),
     path('authentications/', include('authentications.urls') ),
     path('user/', include('user.urls') ),
+    path('blog/', include('blog.urls') ),
    
     
 ]

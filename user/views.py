@@ -5,14 +5,14 @@ from rest_framework.permissions import IsAuthenticated
 
 class UserProfileView(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]  # Authentication Required
+    permission_classes = [IsAuthenticated] 
 
     def get(self, request):
-        user = request.user  # JWT থেকে user নেওয়া হবে
+        user = request.user  
 
-        print("🚀 Debug: Authenticated User ->", user)  # Debugging
+        print(" Authenticated User ->", user)  
 
-        if user.is_anonymous:  # যদি AnonymousUser হয়
+        if user.is_anonymous:  
             return Response({"error": "Invalid Token or User not authenticated"}, status=401)
 
         return Response({
