@@ -72,7 +72,6 @@ REST_FRAMEWORK = {
 }
 
 
- 
 AUTH_USER_MODEL = 'authentications.CustomUser'
 
 # JWT Settings
