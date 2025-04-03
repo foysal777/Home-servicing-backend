@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Listing
+from .models import Category, Listing, Order
 
 class ListingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,3 +12,9 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['name', 'slug', 'description', 'listings']  # Include slug in the fields
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ['id', 'user', 'listing', 'total_price', 'payment_status', 'transaction_id']

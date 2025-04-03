@@ -11,6 +11,7 @@ urlpatterns = [
     path('authentications/', include('authentications.urls') ),
     path('user/', include('user.urls') ),
     path('blog/', include('blog.urls') ),
+    path('payment/', include('payment.urls') ),
    
     
 ]
