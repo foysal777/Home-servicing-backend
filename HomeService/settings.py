@@ -75,12 +75,12 @@ STRIPE_PUBLISHABLE_KEY = "pk_test_51RA0154Ft3OiftBEBdRpJAIRlRHPws30OrFnt6a8DBRDr
 # JWT Settings
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=59),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=5),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'ALGORITHM': 'HS256',
-    # Replace with your secret key
+    # Replace with MY secret key
     'SIGNING_KEY': 'django-insecure-3q+kki&bn&%m+^tq0x81)^po(7tf+%!!d+m&abbka12)orf$t2',
 }
 
@@ -186,10 +186,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # EMAIL=foysal.cse11@gmail.com
 # EMAILPASSWORD=szvisvfphewtlcma
-# 2nd
+# 2nd email password
 # EMAILPASSWORD=swxn xvdt cshu cviv
-
+#for_log_in
 # EMAIL=foysal.cse11@gmail.com
 # loginPass : Goy%%s33
-
+#DRF Built in TOken
 # token : 92a2cc4cd5170380b47c723009b49509ecfec56b

@@ -1,20 +1,20 @@
-# serializers.py
+
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from authentications.models import CustomUser  # Ensure CustomUser is imported
+from authentications.models import CustomUser  
 
 class RegisterSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(write_only=True)
 
     class Meta:
-        model = CustomUser  # Use CustomUser model
+        model = CustomUser  
         fields = ['username', 'email', 'password', 'password2']
 
     def validate(self, data):
         # Check if passwords match
         if data['password'] != data['password2']:
             raise serializers.ValidationError("Passwords do not match.")
-        # Optionally add more password validation here (length, special characters, etc.)
+
         return data
 
     def create(self, validated_data):
@@ -30,8 +30,6 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 # for log in (admin log in korle)
-
-
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
@@ -46,7 +44,7 @@ class LoginSerializer(serializers.Serializer):
         if user is None:
             raise serializers.ValidationError("Invalid email or password.")
 
-        # Return user details along with is_superuser & is_staff
+    #  return super & staff user 
         return {
             "user": user,
             "is_superuser": user.is_superuser,
