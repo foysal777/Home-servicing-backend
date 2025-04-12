@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'review',
     'user',
     'blog',
+    'booking',
     
     'rest_framework_simplejwt.token_blacklist',
 

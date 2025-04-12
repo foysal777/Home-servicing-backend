@@ -22,12 +22,12 @@ class RegisterView(generics.CreateAPIView):
 
         # Check if the user already exists
         if User.objects.filter(email=email).exists():
-            return Response({"error": "User already exists!"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "User email already exists!"}, status=status.HTTP_400_BAD_REQUEST)
 
         # Create an inactive user (not saved in admin yet)
         user = User.objects.create_user(email=email, username=username, password=password)
         user.is_active = False
-        user.is_verified = False  # Ensure this field exists in the model!
+        user.is_verified = False  
         user.save()
 
         # Generate JWT token for email verification
